@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronFitness - Supere Seus Limites</title>
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Black', Gadget, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #ff4a00; /* Laranja de alta energia */
+            --dark-bg: #0d0d0d;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #a3a3a3;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- NAVEGAÇÃO --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(13, 13, 13, 0.95);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* --- SEÇÃO HERO --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(13, 13, 13, 0.9)), 
+                        url('https://unsplash.com') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-family: Arial, sans-serif;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 1rem 2.5rem;
+            border: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #e04100;
+            transform: scale(1.05);
+        }
+
+        /* --- SEÇÕES PRINCIPAIS --- */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        /* --- GRID DE MODALIDADES --- */
+        .grid-modalidades {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #262626;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Imagens específicas do Unsplash para cada modalidade */
+        .img-musculacao { background-image: url('https://unsplash.com'); }
+        .img-funcional { background-image: url('https://unsplash.com'); }
+        .img-cardio { background-image: url('https://unsplash.com'); }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-body h3 {
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .card-body p {
+            color: var(--text-gray);
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+        }
+
+        /* --- PLANOS --- */
+        .grid-planos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .plano-box {
+            background-color: var(--card-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .plano-box.destaque {
+            border-color: var(--primary);
+        }
+
+        .tag-destaque {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--primary);
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .plano-box h3 {
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .preco {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .preco span {
+            font-size: 1rem;
+            color: var(--text-gray);
+        }
+
+        .plano-box ul {
+            list-style: none;
+            margin-bottom: 2rem;
+            font-family: Arial, sans-serif;
+            color: var(--text-gray);
+        }
+
+        .plano-box ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- CALCULADORA DE IMC (JAVASCRIPT INTERATIVO) --- */
+        .imc-container {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid #262626;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #0d0d0d;
+            border: 1px solid #444;
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 4px;
+        }
+
+        .resultado-imc {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* --- RODAPÉ --- */
+        footer {
+            background-color: #050505;
+            text-align: center;
+            padding: 2rem;
+            font-family: Arial, sans-serif;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            border-top: 1px solid #262626;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            header { padding: 1rem; flex-direction: column; gap: 1rem; }
+            nav a { margin: 0 0.5rem; }
+            .section { padding: 4rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENU DE NAVEGAÇÃO -->
+    <header>
+        <div class="logo">Iron<span>Fitness</span></div>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#modalidades">Modalidades</a>
+            <a href="#planos">Planos</a>
+            <a href="#imc">Calcule seu IMC</a>
+        </nav>
+    </header>
+
+    <!-- BANNER DE ENTRADA (HERO) -->
+    <section id="inicio" class="hero">
+        <h1>Construa sua melhor <span>versão</span></h1>
+        <p>Ambiente moderno, os melhores equipamentos do mercado e professores prontos para guiar sua evolução física.</p>
+        <a href="#planos" class="btn">Matricule-se já</a>
+    </section>
+
+    <!-- MODALIDADES -->
+    <section id="modalidades" class="section">
+        <h2 class="section-title">Nossas <span>Modalidades</span></h2>
+        <div class="grid-modalidades">
+            
+            <div class="card">
+                <div class="card-img img-musculacao"></div>
+                <div class="card-body">
+                    <h3>Musculação</h3>
+                    <p>Equipamentos biomeânicos de ponta para hipertrofia, ganho de força e definição muscular com segurança.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img img-funcional"></div>
+                <div class="card-body">
+                    <h3>Treino Funcional</h3>
+                    <p>Circuitos dinâmicos focados em agilidade, queima calórica acelerada e fortalecimento do core.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img img-cardio"></div>
